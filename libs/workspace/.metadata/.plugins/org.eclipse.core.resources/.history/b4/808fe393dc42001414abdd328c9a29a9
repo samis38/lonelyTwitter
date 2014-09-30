@@ -1,0 +1,122 @@
+package com.example.listshow;
+
+import java.util.ArrayList;
+
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ListView;
+
+
+
+public class MainActivity extends Activity{
+	ListView l;
+	Button delete;
+	Button add;
+	EditText et;
+	String event;
+	ArrayList<String> a = new ArrayList<String>();
+	ArrayAdapter<String> aa;
+	SparseBooleanArray mCheckStates ;
+	
+	CheckBox cbs;
+	
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        
+        l=(ListView) findViewById(R.id.list);
+        l.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        delete = (Button)findViewById(R.id.button1);
+        add = (Button)findViewById(R.id.button2);
+        et = (EditText) findViewById(R.id.ed1);
+        aa = new ArrayAdapter<String>(this,R.layout.sl, R.id.textView1, a);
+		l.setAdapter(aa);
+		
+       
+		 add.setOnClickListener(new OnClickListener()
+		    {
+		        @Override
+		        public void onClick(View v)
+		        {
+		        	event = et.getText().toString();
+		        	a.add(event);
+					aa.notifyDataSetChanged();
+					et.setText("");
+					event = "";
+		        }
+		
+		    });    
+
+	    delete.setOnClickListener(new OnClickListener()
+	    {
+	        @Override
+	        public void onClick(View v)
+	        {
+	        	
+	        	SparseBooleanArray checked = l.getCheckedItemPositions();
+                for (int i = 0; i < l.getCount(); i++){
+
+                    if (checked.get(i)==true)
+                    {
+                         a.remove(i);
+                    } 
+                    a.remove(0);
+                    aa.notifyDataSetChanged(); 
+
+                }
+                 l.clearChoices();               
+	        }
+	    });
+    }
+}
+
+class NewAdapter extends ArrayAdapter<String>{
+	Context context;
+	NewAdapter(Context c, String[] titles){
+		super(c,R.layout.sl,R.id.textView1,titles);
+		this.context=c;
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent){
+		LayoutInflater inflater=context.getSystemService();
+		return super.getView(position, convertView, parent);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

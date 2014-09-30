@@ -1,0 +1,15 @@
+package com.example.todolist;
+
+public class Event {
+	protected String content;
+	Boolean selected;
+	
+	public Event(String content){
+		this.content = content;
+	}
+	
+	public String getEvent(){
+		return this.content;
+	}
+
+}

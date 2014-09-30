@@ -1,0 +1,32 @@
+package com.example.todolist;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+public class Adapter extends ArrayAdapter<Event>{
+	
+	public Adapter(Context context,int textViewResourceId,List<Event> objects) {
+		super(context,textViewResourceId,objects);
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent){
+		if (convertView == null) {
+			LayoutInflater inflater = LayoutInflater.from(this.getContext());
+			convertView = inflater.inflate(R.layout.single_layout,null);
+		}
+		Event event=this.getItem(position);
+		if(event!=null){
+			TextView eventText=(TextView)convertView.findViewById(R.id.event_text);
+			
+		}
+		return null;
+	}
+	
+}

@@ -1,0 +1,33 @@
+package model;
+
+public class Event {
+	protected String content;
+	Boolean selected=false;
+	
+	public Event(String content, Boolean selected){
+		this.content = content;
+		this.selected = selected;
+	}
+	
+	public String getEvent(){
+		return this.content;
+	}
+	
+	public boolean getStatus(){
+		return this.selected;
+	}
+	
+	public void select(){
+		this.selected=true;
+	}
+	
+	public void unSelect(){
+		this.selected=false;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		
+	}
+
+}

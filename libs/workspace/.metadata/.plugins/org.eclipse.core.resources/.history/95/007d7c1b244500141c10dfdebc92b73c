@@ -1,0 +1,68 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import android.widget.ArrayAdapter;
+
+public class EventList {
+	
+	private ArrayList<Event> eventList;
+	//ArrayList<Event> archivedEventList;
+	private ArrayAdapter<Event> adapter=null;
+	
+	public EventList(){
+		eventList = new ArrayList<Event>();
+	}
+	
+	public void setAdpater(ArrayAdapter<Event> adapter){
+		this.adapter=adapter;
+	}
+	
+	public void addEvent(Event event){
+		eventList.add(event);
+		if(this.adapter!=null){
+			adapter.notifyDataSetChanged();
+		}
+	}
+	
+	public void removeEvent(){
+		Iterator<Event> i=this.eventList.iterator();
+		while (i.hasNext()){
+			Event e=i.next();
+			if(e.getStatus()){
+				i.remove();
+			}
+		}
+		adapter.notifyDataSetChanged();
+	}
+	
+	public List<Event> getCurrentList(){
+		return this.eventList;
+	}
+	
+	/**
+	public void archiveEvent(ArrayList<Event> eventList){
+		String archivedEvent = "";
+		for(int i= 0 ; i < eventList.size(); i++){
+			if(eventList.get(i).selected == true){
+				archivedEvent = eventList.get(i).content;
+				archivedEventList.add(new Event(archivedEvent, false));
+			}
+		}
+	}
+	
+	public void removeArchivedEvent(ArrayList<Event> archivedEventList){
+		for(int i= 0 ; i < archivedEventList.size(); i++){
+			if(archivedEventList.get(i).selected == true){
+				archivedEventList.remove(i);
+			}
+		}
+	}
+	**/
+	
+	public int size(){
+		return eventList.size();
+	}
+}

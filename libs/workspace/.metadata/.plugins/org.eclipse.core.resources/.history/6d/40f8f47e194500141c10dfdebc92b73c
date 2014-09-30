@@ -1,0 +1,11 @@
+package com.example.todolist;
+
+public class EventListController {
+	private static EventList eventList = null;
+	static public EventList getEventList(){
+		if (eventList == null){
+			eventList = new EventList();
+		}
+		return eventList;
+	}
+}

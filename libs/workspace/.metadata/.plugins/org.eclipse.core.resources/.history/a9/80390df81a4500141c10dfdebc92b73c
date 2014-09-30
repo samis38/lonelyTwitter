@@ -1,0 +1,16 @@
+package com.example.todolist;
+
+import java.util.List;
+
+import android.content.Context;
+import android.widget.ArrayAdapter;
+
+public class Adapter extends ArrayAdapter<Event>{
+	
+	public Adapter(Context context,int textViewResourceId,List<Event> objects) {
+		super(context,textViewResourceId,objects);
+	}
+	
+	
+	
+}

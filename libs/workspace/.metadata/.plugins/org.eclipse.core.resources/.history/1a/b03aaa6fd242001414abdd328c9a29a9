@@ -1,0 +1,99 @@
+package com.example.listshow;
+
+import java.util.ArrayList;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.util.SparseBooleanArray;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.ListView;
+import android.widget.TextView;
+
+
+
+public class MainActivity extends Activity{
+	ListView l;
+	Button delete;
+	ArrayList<String> a = new ArrayList<String>();
+	ArrayAdapter<String> aa;
+	SparseBooleanArray mCheckStates ;
+	
+	CheckBox cbs;
+	
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        
+        
+        l=(ListView) findViewById(R.id.list);
+        l.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        delete = (Button)findViewById(R.id.button1);
+        aa = new ArrayAdapter<String>(this,R.layout.sl, R.id.textView1, a);
+		l.setAdapter(aa);
+		
+
+        a.add("Android");
+        a.add("Apple");
+        a.add("Blackberry");
+       
+		
+		
+
+	    delete.setOnClickListener(new OnClickListener()
+	    {
+	        @Override
+	        public void onClick(View v)
+	        {
+	        	//a.add("Blackberry");
+	        	SparseBooleanArray checked = l.getCheckedItemPositions();
+                for (int i = 0; i < l.getCount(); i++){
+
+                    if (checked.get(i)==true)
+                    {
+                         a.remove(i);
+                    } 
+                    aa.notifyDataSetChanged(); 
+
+                }
+                 l.clearChoices();               
+	        }
+	    });
+    }
+    
+    
+    static class ViewHolder {
+    	TextView text;
+    	CheckBox cb;
+    	}
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

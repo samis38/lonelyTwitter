@@ -1,0 +1,60 @@
+package adapter;
+
+import java.util.List;
+
+import model.Event;
+
+import com.example.todolist.R;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
+import android.widget.TextView;
+
+public class Adapter extends ArrayAdapter<Event>{
+	
+	public Adapter(Context context,int textViewResourceId,List<Event> objects) {
+		super(context,textViewResourceId,objects);
+	}
+	
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent){
+		if (convertView == null) {
+			LayoutInflater inflater = LayoutInflater.from(this.getContext());
+			convertView = inflater.inflate(R.layout.single_layout,null);
+		}
+		Event event=this.getItem(position);
+		if(event!=null){
+			TextView eventText=(TextView)convertView.findViewById(R.id.event_text);
+			eventText.setText(event.getEvent());
+			//gay
+			CheckBox checkBox=(CheckBox)convertView.findViewById(R.id.check_box);
+			
+			if(event.getStatus()){
+				checkBox.setSelected(true);
+			}
+			else{
+				checkBox.setSelected(false);
+			}
+			
+			checkBox.setOnClickListener(new OnClickListener() {
+			    @Override
+			    public void onClick(View arg0) {
+			    	if(event.getStatus()){
+			    		event.unSelect();
+			    	}
+			    	else{
+			    		event.select();
+			    	}
+			    }
+			});
+			
+		}
+		return convertView;
+	}
+	
+}

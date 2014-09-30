@@ -1,0 +1,48 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class EventList {
+	
+	ArrayList<Event> eventList;
+	ArrayList<Event> archivedEventList;
+	
+	public EventList(){
+		eventList = new ArrayList<Event>();
+	}
+	
+	public Collection<Event> getEvents(){
+		return eventList;
+	}
+	
+	public void addEvent(Event newEvent){
+		eventList.add(newEvent);
+	}
+	
+	public void removeEvent(Event newEvent){
+		eventList.remove(newEvent);
+	}
+	
+	public void archiveEvent(ArrayList<Event> eventList){
+		String archivedEvent = "";
+		for(int i= 0 ; i < eventList.size(); i++){
+			if(eventList.get(i).selected == true){
+				archivedEvent = eventList.get(i).content;
+				archivedEventList.add(new Event(archivedEvent, false));
+			}
+		}
+	}
+	
+	public void removeArchivedEvent(ArrayList<Event> archivedEventList){
+		for(int i= 0 ; i < archivedEventList.size(); i++){
+			if(archivedEventList.get(i).selected == true){
+				archivedEventList.remove(i);
+			}
+		}
+	}
+	
+	public int size(){
+		return eventList.size();
+	}
+}

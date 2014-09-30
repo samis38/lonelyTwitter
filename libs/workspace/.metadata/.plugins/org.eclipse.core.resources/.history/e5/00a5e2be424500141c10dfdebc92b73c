@@ -1,0 +1,33 @@
+package activity;
+
+import model.EventList;
+
+import com.example.todolist.R;
+
+import adapter.Adapter;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+
+public class ArchivedEventActivity extends Activity {
+	private ListView archList=null;
+	private Button remove=null;
+	private Button unarchive=null;
+	private EventList eventList=null;
+	private Adapter adapter=null;
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.archived_event);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.archived_event, menu);
+		return true;
+	}
+}

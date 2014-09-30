@@ -1,0 +1,7 @@
+package com.example.todolist;
+
+public class Event {
+	protected String content;
+	Boolean selected;
+
+}

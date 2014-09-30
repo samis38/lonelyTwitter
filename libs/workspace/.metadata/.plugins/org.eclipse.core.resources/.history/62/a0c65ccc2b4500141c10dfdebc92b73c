@@ -1,0 +1,11 @@
+package model;
+
+import java.util.List;
+
+public class DiskList {
+	private List<Event> eventList=null;
+	
+	public DiskList(List<Event> eventList){
+		
+	}
+}

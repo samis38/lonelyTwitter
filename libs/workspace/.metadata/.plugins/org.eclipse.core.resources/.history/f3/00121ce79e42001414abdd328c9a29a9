@@ -1,0 +1,95 @@
+package com.example.ass01;
+
+import java.util.ArrayList;
+
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+
+
+public class MainActivity extends Activity implements OnClickListener {
+
+	EditText eventText;
+	Button updateButton, removeButton;
+	ListView eventsList;
+	boolean checkbox;
+	int count = 0;
+	String event = "";
+	
+//	ArrayList<String> sigleEvent;
+//	ArrayAdapter<String> adapter;
+
+	ArrayList<AnEvent> checkableEvent;
+	ArrayAdapter<AnEvent> listAdapter;
+	
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		eventText = (EditText) findViewById(R.id.inputEvent);
+//		checkbox = (CheckBox) findViewById(R.id.inputEvent);
+		updateButton = (Button) findViewById(R.id.updateEventButton);
+		removeButton = (Button) findViewById(R.id.removeEventButton);
+		eventsList = (ListView) findViewById(R.id.listView1);
+		
+		updateButton.setOnClickListener(this);
+		removeButton.setOnClickListener(this);
+//		sigleEvent = new ArrayList<String>();
+//		adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, sigleEvent);
+//		eventsList.setAdapter(adapter);
+		checkableEvent = new ArrayList<AnEvent>();
+		listAdapter = new ArrayAdapter<AnEvent>(this,android.R.layout.simple_list_item_1, checkableEvent);
+		eventsList.setAdapter(listAdapter);
+	
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		AnEvent anEvent = new AnEvent(checkbox, event);
+		
+		if (v == this.updateButton){
+			event = eventText.getText().toString();
+			if (event.length() > 0){
+				anEvent.setText(event);
+				anEvent.setCheckBox(false);
+				this.checkableEvent.add(anEvent);
+				this.checkableEvent.remove(anEvent);
+				this.listAdapter.notifyDataSetChanged();
+				this.eventText.setText("");
+				event = "";
+			}
+			
+		}
+		
+		else if (v == this.removeButton){
+			event = eventText.getText().toString();
+			if (event.length() > 0){
+				anEvent.setText(event);
+				anEvent.setCheckBox(false);
+				this.checkableEvent.remove(anEvent);
+				this.listAdapter.notifyDataSetChanged();
+				this.eventText.setText("");
+				event = "";
+			}
+		}
+	}	
+}

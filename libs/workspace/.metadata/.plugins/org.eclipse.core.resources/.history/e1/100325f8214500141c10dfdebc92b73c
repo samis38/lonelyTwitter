@@ -1,0 +1,44 @@
+package model;
+
+import java.util.Date;
+
+public class Event {
+	private String id=null;
+	private String content=null;
+	Boolean selected=false;
+	
+	public Event(String content, Boolean selected){
+		this.id = content+(new Date()).toString();
+		this.content = content;
+		this.selected = selected;
+	}
+	
+	public String getId(){
+		return this.id;
+	}
+	
+	public String getEvent(){
+		return this.content;
+	}
+	
+	public boolean getStatus(){
+		return this.selected;
+	}
+	
+	public void select(){
+		this.selected=true;
+	}
+	
+	public void unSelect(){
+		this.selected=false;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		if(this.id.equals(((Event)o).getId())){
+			return true;
+		}
+		return false;
+	}
+
+}

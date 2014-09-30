@@ -1,0 +1,16 @@
+package model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DiskList {
+	private ArrayList<Event> eventList=null;
+	
+	public DiskList(List<Event> eventList){
+		this.eventList=eventList;
+	}
+	
+	public ArrayList<Event> getList(){
+		return this.eventList;
+	}
+}
